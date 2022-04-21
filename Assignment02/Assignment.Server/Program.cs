@@ -1,14 +1,21 @@
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello Assignment.Server!");
 
-app.MapGet("Hello1", () => "Hello World1!");
+app.MapGet("/User", ([FromQuery] int id) => new
+{
+    Id = id,
+    Name = "John Doe"
+});
 
-app.MapPost("Hello2", () => "Hello World2!");
-
-app.MapGet("/Service/Hello3", () => "Hello World3!");
-
-app.MapPost("/Service/Hello4", () => "Hello World4!");
+app.MapPost("/User", ([FromBody] AddUserRequest request) => $"用户名为：{request.Name}");
 
 app.Run();
+
+public class AddUserRequest
+{
+    public string Name { get; set; }
+}
