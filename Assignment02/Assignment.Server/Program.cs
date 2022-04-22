@@ -5,13 +5,21 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello Assignment.Server!");
 
-app.MapGet("/User", ([FromQuery] int id) => new
+app.MapGet("/User", ([FromQuery] int id) =>
 {
-    Id = id,
-    Name = "John Doe"
+    //todo: 模拟根据id查询用户信息
+    return new
+    {
+        Id = id,
+        Name = "John Doe"
+    };
 });
 
-app.MapPost("/User", ([FromBody] AddUserRequest request) => $"用户名为：{request.Name}");
+app.MapPost("/User", ([FromBody] AddUserRequest request) =>
+{
+    //todo: 模拟添加用户，并返回用户名称
+    return request.Name;
+});
 
 app.Run();
 

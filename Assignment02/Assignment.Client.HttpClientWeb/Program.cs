@@ -56,10 +56,11 @@ app.MapGet("/Test/User/Add", async ([FromServices] ICallerProvider callerProvide
 {
     string timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString(CultureInfo.InvariantCulture);
     var userName = "ss_" + timeSpan; //模拟一个随机的用户名
-    string? response= await callerProvider.PostAsync<object, string>("User", new { Name = userName });
-    return $"创建用户成功了，{response}";
+    string? response = await callerProvider.PostAsync<object, string>("User", new { Name = userName });
+    return $"创建用户成功了，用户名称为：{response}";
 });
-
+app.MapGet("/Test/User/Hello", ([FromServices] ICallerProvider userCallerProvider, string name)
+    => userCallerProvider.GetAsync<string>($"/Hello/{name}"));
 app.Run();
 
 public class UserDto
