@@ -26,8 +26,9 @@ app.MapGet("/Test/User/Get", async ([FromServices] UserCaller caller) =>
 
 app.MapGet("/Test/User/Add", async ([FromServices] UserCaller caller) =>
 {
-    string timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString(CultureInfo.InvariantCulture);
-    var userName = "ss_" + timeSpan; //模拟一个随机的用户名
+    var dateTimeOffset = new DateTimeOffset(DateTime.UtcNow);
+    string timeSpan = dateTimeOffset.ToUnixTimeSeconds().ToString();
+    var userName = "ss_" + timeSpan; //模拟一个用户名
     string? response= await caller.AddUserAsync(userName);
     return $"创建用户成功了，用户名称为：{response}";
 });

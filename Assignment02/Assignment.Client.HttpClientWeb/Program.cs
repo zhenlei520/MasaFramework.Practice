@@ -20,7 +20,7 @@ builder.Services.AddCaller(option =>
     option.UseHttpClient(opt =>
     {
         opt.BaseApi = "http://localhost:5000";
-        opt.Name = "userCaller"; // 当前Caller的别名。非必填(仅有一个Caller时)，其Name不能重复
+        opt.Name = "userCaller"; // 当前Caller的别名(仅有一个Caller时可以不填)，Name不能重复
         opt.IsDefault = false; // 不是默认的Caller,默认的Caller支持注入ICallerProvider获取
     });
 
@@ -54,8 +54,9 @@ app.MapGet("/Test/User/Get", async ([FromServices] ICallerProvider callerProvide
 
 app.MapGet("/Test/User/Add", async ([FromServices] ICallerProvider callerProvider) =>
 {
-    string timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds.ToString(CultureInfo.InvariantCulture);
-    var userName = "ss_" + timeSpan; //模拟一个随机的用户名
+    var dateTimeOffset = new DateTimeOffset(DateTime.UtcNow);
+    string timeSpan = dateTimeOffset.ToUnixTimeSeconds().ToString();
+    var userName = "ss_" + timeSpan; //模拟一个用户名
     string? response = await callerProvider.PostAsync<object, string>("User", new { Name = userName });
     return $"创建用户成功了，用户名称为：{response}";
 });
