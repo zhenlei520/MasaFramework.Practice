@@ -1,0 +1,23 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:23141",
+      "sslPort": 44333
+    }
+  },
+  "profiles": {
+    "Assignment.Client.DaprClientWeb.V2": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7102;http://localhost:5102",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DAPR_GRPC_PORT": "7007",
+        "DAPR_HTTP_PORT": "7008"
+      }
+    }
+  }
+}

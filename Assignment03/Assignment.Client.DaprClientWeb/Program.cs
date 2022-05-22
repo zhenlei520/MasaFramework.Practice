@@ -1,46 +1,17 @@
 using Masa.Utils.Caller.Core;
-using Masa.Utils.Caller.HttpClient;
+using Masa.Utils.Caller.DaprClient;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-#region 非必须 (如果不需要[委托处理程序](https: //docs.microsoft.com/zh-cn/dotnet/api/system.net.http.delegatinghandler?view=net-6.0) 可以注释以下代码)
-
-// builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-// builder.Services.AddScoped<HttpClientDelegatingHandler>();
-
-#endregion
-
-builder.Services.AddCaller(option =>
+builder.Services.AddCaller(options =>
 {
-
-    #region 不使用委托处理程序
-
-    option.UseHttpClient(opt =>
+    options.UseDapr(masaDaprClientBuilder =>
     {
-        opt.BaseApi = "http://localhost:5000";
-        opt.Name = "userCaller"; // 当前Caller的别名(仅有一个Caller时可以不填)，Name不能重复
-        opt.IsDefault = false; // 不是默认的Caller,默认的Caller支持注入ICallerProvider获取
+        masaDaprClientBuilder.AppId = "Assignment-Server";//设置当前caller下Dapr的AppId
     });
-
-    #endregion
-
-    #region 使用委托处理程序
-
-    // option.UseHttpClient(opt =>
-    // {
-    //     opt.BaseApi = "http://localhost:5000";
-    //     opt.Name = "https";
-    //     opt.IsDefault = false;
-    //     opt.Configure = client =>
-    //     {
-    //         client.Timeout = TimeSpan.FromSeconds(10); //10秒超时
-    //     };
-    // }).AddHttpMessageHandler<HttpClientDelegatingHandler>();
-
-    #endregion
-
 });
+
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello HttpClientWeb.V1!");
