@@ -8,6 +8,8 @@ builder.Services.AddCaller(options =>
 {
     options.UseDapr(masaDaprClientBuilder =>
     {
+        masaDaprClientBuilder.Name = "userCaller"; // 当前Caller的别名(仅有一个Caller时可以不填)，Name不能重复
+        masaDaprClientBuilder.IsDefault = true; // 默认的Caller支持注入ICallerProvider获取（仅有一个Caller时可不赋值）
         masaDaprClientBuilder.AppId = "Assignment-Server";//设置当前caller下Dapr的AppId
     });
 });
