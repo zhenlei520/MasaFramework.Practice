@@ -1,12 +1,16 @@
+using System.Reflection;
 using Assignment.MasaEntityFramework.Infrastructure;
 using Assignment.MasaEntityFramework.Infrastructure.Extensions;
 using Assignment.MasaEntityFramework.Models;
 using Assignment.MasaEntityFramework.Requesties;
+using Masa.BuildingBlocks.Data;
 using Masa.BuildingBlocks.Data.Contracts.DataFiltering;
 using Masa.Contrib.Data.Contracts.EF;
 using Masa.Contrib.Data.EntityFrameworkCore;
+using Masa.Contrib.Data.EntityFrameworkCore.InMemory;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +21,35 @@ builder.Services.AddSwaggerGen();
 
 #endregion
 
-builder.Services.AddMasaDbContext<UserDbContext>(options =>
-{
-    options.Builder = (_, dbContextOptionsBuilder) => dbContextOptionsBuilder.UseInMemoryDatabase("test");
-    options.UseFilter(); //启用数据过滤，完整写法：options.UseFilter(filterOptions => filterOptions.EnableSoftDelete = true);
-});
+#region 添加用户数Db上下文
+
+#region 原始写法
+
+// builder.Services.AddMasaDbContext<UserDbContext>(options =>
+// {
+//     options.Builder = (_, dbContextOptionsBuilder) => dbContextOptionsBuilder.UseInMemoryDatabase("test");
+//     options.UseFilter(); //启用数据过滤，完整写法：options.UseFilter(filterOptions => filterOptions.EnableSoftDelete = true);
+// });
+
+#endregion
+
+#region 从配置文件中获取
+
+// builder.Services.Configure<MasaDbConnectionOptions>(option =>
+// {
+//     option.ConnectionStrings = new ConnectionStrings(new List<KeyValuePair<string, string>>()
+//     {
+//         new("User", "test2")
+//     });
+// });
+builder.Services.AddSingleton<IConnectionStringProvider,CustomizeConnectionStringProvider>();
+builder.Services.AddSingleton<IDbConnectionStringProvider,CustomizeDbConnectionStringProvider>();
+
+builder.Services.AddMasaDbContext<UserDbContext>(options => options.UseInMemoryDatabase().UseFilter());
+
+#endregion
+
+#endregion
 
 var app = builder.Build();
 
@@ -40,7 +68,6 @@ if (app.Environment.IsDevelopment())
     });
 
     #endregion
-
 }
 
 #endregion
@@ -77,6 +104,21 @@ app.MapGet("/all", (UserDbContext dbContext, [FromServices] IDataFilter dataFilt
     {
         return dbContext.Set<User>().ToList();
     }
+});
+
+app.MapGet("/database", (UserDbContext dbContext) =>
+{
+    var field = typeof(MasaDbContext).GetField("Options", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic)!;
+    var masaDbContextOptions = field.GetValue(dbContext) as MasaDbContextOptions;
+    foreach (var dbContextOptionsExtension in masaDbContextOptions!.Extensions)
+    {
+        if (dbContextOptionsExtension is InMemoryOptionsExtension memoryOptionsExtension)
+        {
+            return memoryOptionsExtension.StoreName;
+        }
+    }
+
+    return "";
 });
 
 app.Run();
