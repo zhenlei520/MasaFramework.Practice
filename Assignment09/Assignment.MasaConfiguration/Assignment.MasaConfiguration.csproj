@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Masa.Contrib.BasicAbility.Dcc" Version="0.5.0-preview.1" />
+      <PackageReference Include="Masa.Contrib.Configuration" Version="0.5.0-preview.1" />
+    </ItemGroup>
+
+</Project>
