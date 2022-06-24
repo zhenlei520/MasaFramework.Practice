@@ -9,8 +9,8 @@ app.MapGet("/", () => "Hello DistributedLocking.Local!");
 
 app.MapGet("lock", (IDistributedLock distributedLock) =>
 {
-    using var lockObj = distributedLock.TryGet("test", TimeSpan.FromSeconds(3));
-    if (lockObj != null)
+    using var @lock = distributedLock.TryGet("test", TimeSpan.FromSeconds(3));
+    if (@lock != null)
     {
         //todo: 获取锁成功
         return "success";
