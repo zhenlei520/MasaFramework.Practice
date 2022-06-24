@@ -6,9 +6,10 @@ builder.Services.AddSnowflake(options =>
     // options.TimestampType = TimestampType.Seconds;//时间戳使用秒
     // options.EnableMachineClock = true;//启用时钟锁
 });//注册雪花id
+
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello SnowflakeId!");
+app.MapGet("/", () => "Hello DistributedSnowflakeId!");
 
 app.MapGet("/id/generator/ioc", (ISnowflakeGenerator snowflakeGenerator)
     => snowflakeGenerator.Create()); //生成id
