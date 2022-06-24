@@ -17,7 +17,7 @@ builder.Services.AddDistributedSnowflake();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello SnowflakeId!");
+app.MapGet("/", () => "Hello DistributedSnowflakeId!");
 
 app.MapGet("/id/generator/ioc", (ISnowflakeGenerator snowflakeGenerator)
     => snowflakeGenerator.Create()); //生成id
