@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.SnowflakeId", "Assignment.SnowflakeId\Assignment.SnowflakeId.csproj", "{55FDAE6A-BB27-4572-9237-34C18020BB6E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.DistributedSnowflakeId", "Assignment.DistributedSnowflakeId\Assignment.DistributedSnowflakeId.csproj", "{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.InProcessEventBus", "Assignment.InProcessEventBus\Assignment.InProcessEventBus.csproj", "{6ACC24C9-3A30-47CC-998E-3411A438A25A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,13 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{55FDAE6A-BB27-4572-9237-34C18020BB6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55FDAE6A-BB27-4572-9237-34C18020BB6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55FDAE6A-BB27-4572-9237-34C18020BB6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55FDAE6A-BB27-4572-9237-34C18020BB6E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ACC24C9-3A30-47CC-998E-3411A438A25A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ACC24C9-3A30-47CC-998E-3411A438A25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ACC24C9-3A30-47CC-998E-3411A438A25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ACC24C9-3A30-47CC-998E-3411A438A25A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

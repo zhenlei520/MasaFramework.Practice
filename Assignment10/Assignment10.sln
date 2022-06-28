@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.DistributedLocking.Local", "Assignment.DistributedLocking.Local\Assignment.DistributedLocking.Local.csproj", "{17E33FE7-2BB3-40CD-8F70-2C7C208396F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.SnowflakeId", "Assignment.SnowflakeId\Assignment.SnowflakeId.csproj", "{55FDAE6A-BB27-4572-9237-34C18020BB6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.DistributedSnowflakeId", "Assignment.DistributedSnowflakeId\Assignment.DistributedSnowflakeId.csproj", "{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{17E33FE7-2BB3-40CD-8F70-2C7C208396F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17E33FE7-2BB3-40CD-8F70-2C7C208396F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17E33FE7-2BB3-40CD-8F70-2C7C208396F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17E33FE7-2BB3-40CD-8F70-2C7C208396F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55FDAE6A-BB27-4572-9237-34C18020BB6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55FDAE6A-BB27-4572-9237-34C18020BB6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55FDAE6A-BB27-4572-9237-34C18020BB6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55FDAE6A-BB27-4572-9237-34C18020BB6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CA63DE4-C435-4B54-B457-617BD4EDB7E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

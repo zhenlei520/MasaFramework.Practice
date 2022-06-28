@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.DependencyInjection", "Assignment.DependencyInjection\Assignment.DependencyInjection.csproj", "{0DF417A4-0835-4409-8A2D-EB4E7E890732}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.MasaConfiguration", "Assignment.MasaConfiguration\Assignment.MasaConfiguration.csproj", "{09527C53-B9AA-4DA7-8196-A701DA3CE726}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0DF417A4-0835-4409-8A2D-EB4E7E890732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0DF417A4-0835-4409-8A2D-EB4E7E890732}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0DF417A4-0835-4409-8A2D-EB4E7E890732}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0DF417A4-0835-4409-8A2D-EB4E7E890732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09527C53-B9AA-4DA7-8196-A701DA3CE726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09527C53-B9AA-4DA7-8196-A701DA3CE726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09527C53-B9AA-4DA7-8196-A701DA3CE726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09527C53-B9AA-4DA7-8196-A701DA3CE726}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
