@@ -1,4 +1,4 @@
-﻿using Masa.Contrib.Dispatcher.IntegrationEvents.Dapr;
+﻿using Masa.BuildingBlocks.Dispatcher.IntegrationEvents;
 
 namespace Assignment.IntegrationEventBus.Events;
 

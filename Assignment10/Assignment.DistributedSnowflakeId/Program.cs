@@ -1,5 +1,5 @@
 using Masa.BuildingBlocks.Data;
-using Masa.Utils.Caching.Redis.DependencyInjection;
+using Masa.Contrib.Data.IdGenerator.Snowflake.Distributed.Redis;
 using Masa.Utils.Caching.Redis.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +13,7 @@ builder.Services.AddMasaRedisCache(option =>
     option.DefaultDatabase = 2;
     option.Password = "";
 });
-builder.Services.AddDistributedSnowflake();
+builder.Services.AddSnowflake(option => option.UseRedis());
 
 var app = builder.Build();
 

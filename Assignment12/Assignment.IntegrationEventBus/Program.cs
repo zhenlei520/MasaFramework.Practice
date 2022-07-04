@@ -4,6 +4,7 @@ using Dapr;
 using Masa.BuildingBlocks.Dispatcher.IntegrationEvents;
 using Masa.Contrib.Data.EntityFrameworkCore.Sqlite;
 using Masa.Contrib.Data.UoW.EF;
+using Masa.Contrib.Dispatcher.IntegrationEvents.Dapr;
 using Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EF;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,10 +24,11 @@ if (builder.Environment.IsDevelopment())
 
 #endregion
 
-builder.Services.AddDaprEventBus<IntegrationEventLogService>(options =>
+builder.Services.AddIntegrationEventBus<IntegrationEventLogService>(option =>
 {
-    options.UseUoW<UserDbContext>(optionBuilder => optionBuilder.UseSqlite($"Data Source=./Db/{Guid.NewGuid():N}.db;"));
-    options.UseEventLog<UserDbContext>();
+    option.UseDapr();
+    option.UseUoW<UserDbContext>(optionBuilder => optionBuilder.UseSqlite($"Data Source=./Db/{Guid.NewGuid():N}.db;"));
+    option.UseEventLog<UserDbContext>();
 });
 
 var app = builder.Build();
@@ -45,8 +47,7 @@ using (var scope = app.Services.CreateScope())
 
 app.MapGet("/", () => "Hello IntegrationEventBus!");
 
-
-app.MapPost("/register", async (IIntegrationEventBus eventBus) =>
+app.MapGet("/register", async (IIntegrationEventBus eventBus) =>
 {
     //todo: 模拟注册用户并发布注册用户事件
     await eventBus.PublishAsync(new RegisterUserEvent()
@@ -55,7 +56,6 @@ app.MapPost("/register", async (IIntegrationEventBus eventBus) =>
         Mobile = "19999999999"
     });
 });
-
 
 app.MapPost("/IntegrationEvent/RegisterUser", [Topic("pubsub", nameof(RegisterUserEvent))](RegisterUserEvent @event) =>
 {
