@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Masa.Contrib.Dispatcher.Events;
+using Masa.BuildingBlocks.Dispatcher.Events;
 
 namespace Assignment.InProcessEventBus.Events;
 
