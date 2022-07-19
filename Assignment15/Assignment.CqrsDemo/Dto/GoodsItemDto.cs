@@ -1,5 +1,8 @@
 ﻿namespace Assignment.CqrsDemo.Dto;
 
+/// <summary>
+/// 用于返回商品信息
+/// </summary>
 public class GoodsItemDto
 {
     public Guid Id { get; set; }

@@ -16,6 +16,10 @@ public class GoodsHandler
         _integrationEventBus = integrationEventBus;
     }
 
+    /// <summary>
+    /// 将商品添加到Db，并发送跨进程事件，用于处理读数据
+    /// </summary>
+    /// <param name="command"></param>
     [EventHandler]
     public async Task AddGoods(AddGoodsCommand command)
     {
@@ -26,6 +30,11 @@ public class GoodsHandler
             command.Count));
     }
 
+    /// <summary>
+    /// 从缓存查询商品信息
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
     [EventHandler]
     public Task GetGoods(GoodsItemQuery query)
     {

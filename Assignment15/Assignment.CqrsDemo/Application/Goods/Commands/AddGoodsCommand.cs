@@ -2,6 +2,9 @@
 
 namespace Assignment.CqrsDemo.Application.Goods.Commands;
 
+/// <summary>
+/// 添加商品参数，用于接受商品参数
+/// </summary>
 public record AddGoodsCommand : Command
 {
     public string Name { get; set; }

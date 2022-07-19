@@ -1,10 +1,13 @@
+using Assignment.CqrsDemo.Application.Goods.Commands;
+using Assignment.CqrsDemo.Application.Goods.Queries;
 using Assignment.CqrsDemo.IntegrationEvents;
+using Masa.BuildingBlocks.Dispatcher.Events;
 using Masa.Contrib.Dispatcher.Events;
 using Masa.Contrib.Dispatcher.IntegrationEvents.Dapr;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddLogging();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddIntegrationEventBus(dispatcherOptions =>
 {
@@ -13,11 +16,21 @@ builder.Services.AddIntegrationEventBus(dispatcherOptions =>
     dispatcherOptions.UseEventBus();
 });
 
-builder.Services.AddEventBus();
-
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
+
+app.MapPost("/goods/add", async (AddGoodsCommand command, IEventBus eventBus) =>
+{
+    await eventBus.PublishAsync(command);
+});
+
+app.MapGet("/goods/{id}", async (Guid id, IEventBus eventBus) =>
+{
+    var query = new GoodsItemQuery(id);
+    await eventBus.PublishAsync(query);
+    return query.Result;
+});
 
 app.MapPost("/integration/goods/add", (AddGoodsIntegrationEvent @event, ILogger<Program> logger) =>
 {
