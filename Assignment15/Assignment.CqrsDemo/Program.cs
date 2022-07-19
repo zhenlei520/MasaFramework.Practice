@@ -8,6 +8,15 @@ using Masa.Contrib.Dispatcher.IntegrationEvents.Dapr;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDaprStarter(opt =>
+    {
+        opt.DaprHttpPort = 7100;
+        opt.DaprGrpcPort = 7101;
+        opt.AppPort = 5072;
+    });
+}
 
 builder.Services.AddIntegrationEventBus(dispatcherOptions =>
 {
@@ -37,5 +46,12 @@ app.MapPost("/integration/goods/add", (AddGoodsIntegrationEvent @event, ILogger<
     //todo: 模拟添加商品到缓存
     logger.LogInformation("添加商品到缓存");
 }).WithTopic("pubsub", nameof(AddGoodsIntegrationEvent));
+
+app.UseRouting();
+app.UseCloudEvents();
+app.UseEndpoints(endpoint =>
+{
+    endpoint.MapSubscribeHandler();
+});
 
 app.Run();
