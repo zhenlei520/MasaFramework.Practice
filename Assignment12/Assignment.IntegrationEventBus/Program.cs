@@ -2,7 +2,7 @@ using Assignment.IntegrationEventBus.Events;
 using Assignment.IntegrationEventBus.Infrastructure;
 using Dapr;
 using Masa.BuildingBlocks.Dispatcher.IntegrationEvents;
-using Masa.Contrib.Data.EntityFrameworkCore.Sqlite;
+using Masa.Contrib.Data.EntityFrameworkCore;
 using Masa.Contrib.Data.UoW.EF;
 using Masa.Contrib.Dispatcher.IntegrationEvents.Dapr;
 using Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EF;
@@ -24,7 +24,7 @@ if (builder.Environment.IsDevelopment())
 
 #endregion
 
-builder.Services.AddIntegrationEventBus<IntegrationEventLogService>(option =>
+builder.Services.AddIntegrationEventBus(option =>
 {
     option.UseDapr();
     option.UseUoW<UserDbContext>(optionBuilder => optionBuilder.UseSqlite($"Data Source=./Db/{Guid.NewGuid():N}.db;"));
