@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello Assignment.Server!");
 
-app.MapGet("/User", ([FromQuery] int id) =>
+app.MapGet("/User", ([FromQuery] int id, [FromServices] IHttpContextAccessor accessor) =>
 {
     //todo: 模拟根据id查询用户信息
     return new
