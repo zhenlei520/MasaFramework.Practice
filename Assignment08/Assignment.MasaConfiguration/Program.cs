@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.AddMasaConfiguration(configurationBuilder =>
 {
-    configurationBuilder.UseDcc();
+    // configurationBuilder.UseDcc();
     configurationBuilder.UseMasaOptions(options
         => options.MappingConfigurationApi<AppConfig>("AppId")); //映射远程节点下指定AppId的配置，其中配置对象名为AppConfig
 }).Build();
@@ -19,7 +19,7 @@ app.MapGet("/AppConfig", (IOptions<AppConfig> appConfig)
 
 // 使用MasaConfiguration获取配置
 app.MapGet("/AppConfig/ConnectionStrings/MasaConfiguration", (IMasaConfiguration configuration)
-    => configuration.GetConfiguration(SectionTypes.Local)["AppConfig:ConnectionStrings:DefaultConnection"]);
+    => configuration.Local["AppConfig:ConnectionStrings:DefaultConnection"]);
 
 // 使用原始IConfiguration获取配置
 app.MapGet("/AppConfig/ConnectionStrings/Default", (IConfiguration configuration)
