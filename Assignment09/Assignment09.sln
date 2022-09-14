@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.DistributedLocking.Local", "Assignment.DistributedLocking.Local\Assignment.DistributedLocking.Local.csproj", "{17E33FE7-2BB3-40CD-8F70-2C7C208396F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.DistributedLock.Local", "Assignment.DistributedLock.Local\Assignment.DistributedLock.Local.csproj", "{17E33FE7-2BB3-40CD-8F70-2C7C208396F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
