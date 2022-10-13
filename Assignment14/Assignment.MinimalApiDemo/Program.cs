@@ -1,4 +1,5 @@
-using Assignment.MinimalApiDemo.Infrastructure;
+using System.Globalization;using Assignment.MinimalApiDemo.Infrastructure;
+using Microsoft.Extensions.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,13 @@ if (builder.Environment.IsDevelopment())
 #endregion
 
 builder.Services.AddSingleton<IData, Data>();
+
+builder.Services.AddLocalization();
+var serviceProvider = builder.Services.BuildServiceProvider();
+
+var localizer = serviceProvider.GetRequiredService<IStringLocalizer<TestResource>>();
+var res = localizer[""];
+
 var app = builder.AddServices(options =>
 {
     options.Prefix = string.Empty;
@@ -34,5 +42,8 @@ if (builder.Environment.IsDevelopment())
 app.MapGet("/", () => "Hello Assignment.MinimalApiDemo!");
 
 app.MapGet("/test", () => "Test Success!").RequireAuthorization();
+app.MapGet("/api/v1/users/{id}", (Guid id) =>
+{
 
+});
 app.Run();
