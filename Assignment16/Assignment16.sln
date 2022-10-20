@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.DistributedCache", "Assignment.DistributedCache\Assignment.DistributedCache.csproj", "{6F5D3D14-8263-4A13-AD1F-CE2FC0FACA5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment.MultilevelCache", "Assignment.MultilevelCache\Assignment.MultilevelCache.csproj", "{F834D645-B5C0-4BC1-9656-62ED8B8C4800}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F5D3D14-8263-4A13-AD1F-CE2FC0FACA5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F5D3D14-8263-4A13-AD1F-CE2FC0FACA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F5D3D14-8263-4A13-AD1F-CE2FC0FACA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F5D3D14-8263-4A13-AD1F-CE2FC0FACA5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F834D645-B5C0-4BC1-9656-62ED8B8C4800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F834D645-B5C0-4BC1-9656-62ED8B8C4800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F834D645-B5C0-4BC1-9656-62ED8B8C4800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F834D645-B5C0-4BC1-9656-62ED8B8C4800}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
