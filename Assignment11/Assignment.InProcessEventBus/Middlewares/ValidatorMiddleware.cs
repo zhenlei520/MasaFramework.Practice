@@ -4,34 +4,37 @@ using Masa.BuildingBlocks.Dispatcher.Events;
 namespace Assignment.InProcessEventBus.Middlewares;
 
 public class ValidatorMiddleware<TEvent> : Middleware<TEvent>
-    where TEvent : notnull, IEvent
+    where TEvent : IEvent
 {
-    private readonly ILogger<ValidatorMiddleware<TEvent>> _logger;
+    private readonly ILogger<ValidatorMiddleware<TEvent>>? _logger;
     private readonly IEnumerable<IValidator<TEvent>> _validators;
 
-    public ValidatorMiddleware(IEnumerable<IValidator<TEvent>> validators, ILogger<ValidatorMiddleware<TEvent>> logger)
+    public ValidatorMiddleware(IEnumerable<IValidator<TEvent>> validators, ILogger<ValidatorMiddleware<TEvent>>? logger = null)
     {
         _validators = validators;
         _logger = logger;
     }
 
-    public override async Task HandleAsync(TEvent action, EventHandlerDelegate next)
+    public override async Task HandleAsync(TEvent @event, EventHandlerDelegate next)
     {
-        var typeName = action.GetType().FullName;
+        var typeName = @event.GetType().FullName;
 
-        _logger.LogInformation("----- Validating command {CommandType}", typeName);
+        _logger?.LogDebug("----- Validating command {CommandType}", typeName);
 
         var failures = _validators
-            .Select(v => v.Validate(action))
+            .Select(v => v.Validate(@event))
             .SelectMany(result => result.Errors)
             .Where(error => error != null)
             .ToList();
 
         if (failures.Any())
         {
-            _logger.LogWarning("Validation errors - {CommandType} - Command: {@Command} - Errors: {@ValidationErrors}", typeName, action, failures);
+            _logger?.LogError("Validation errors - {CommandType} - Event: {@Command} - Errors: {@ValidationErrors}",
+                typeName,
+                @event,
+                failures);
 
-            throw new ValidationException(failures.Select(x=>x.ErrorMessage).FirstOrDefault());//根据需要抛出异常信息
+            throw new ValidationException("Validation exception", failures);
         }
 
         await next();
