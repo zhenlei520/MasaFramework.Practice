@@ -1,10 +1,10 @@
-﻿using Masa.Contrib.Data.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Assignment.IntegrationEventBus.Infrastructure;
 
 public class UserDbContext : MasaDbContext
 {
-    public UserDbContext(MasaDbContextOptions options) : base(options)
+    public UserDbContext(MasaDbContextOptions<UserDbContext> options) : base(options)
     {
     }
 }

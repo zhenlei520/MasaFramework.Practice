@@ -2,10 +2,9 @@ using Assignment.IntegrationEventBus.Events;
 using Assignment.IntegrationEventBus.Infrastructure;
 using Dapr;
 using Masa.BuildingBlocks.Dispatcher.IntegrationEvents;
-using Masa.Contrib.Data.EntityFrameworkCore;
-using Masa.Contrib.Data.UoW.EF;
+using Masa.Contrib.Data.UoW.EFCore;
 using Masa.Contrib.Dispatcher.IntegrationEvents.Dapr;
-using Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EF;
+using Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EFCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,36 +13,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddDaprStarter(option =>
-    {
-        option.AppPort = 5061;
-        option.DaprGrpcPort = 5032;
-        option.DaprHttpPort = 5031;
-    }, false);
+    builder.Services.AddDaprStarter();
 }
 
 #endregion
 
 builder.Services.AddIntegrationEventBus(option =>
 {
-    option.UseDapr();
-    option.UseUoW<UserDbContext>(optionBuilder => optionBuilder.UseSqlite($"Data Source=./Db/{Guid.NewGuid():N}.db;"));
-    option.UseEventLog<UserDbContext>();
+    option.UseDapr()
+        .UseEventLog<UserDbContext>()
+        .UseUoW<UserDbContext>(optionBuilder => optionBuilder.UseSqlite($"Data Source=./Db/{Guid.NewGuid():N}.db;"));
 });
 
 var app = builder.Build();
-
-#region 迁移数据库
-
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<UserDbContext>();
-    context.Database.Migrate();
-    context.Database.EnsureCreated();
-}
-
-#endregion
 
 app.MapGet("/", () => "Hello IntegrationEventBus!");
 
