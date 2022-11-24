@@ -1,5 +1,5 @@
 ﻿using Assignment.CqrsDemo.Dto;
-using Masa.BuildingBlocks.ReadWriteSpliting.Cqrs.Queries;
+using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Queries;
 
 namespace Assignment.CqrsDemo.Application.Goods.Queries;
 

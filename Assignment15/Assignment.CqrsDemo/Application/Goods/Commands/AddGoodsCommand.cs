@@ -1,4 +1,4 @@
-﻿using Masa.BuildingBlocks.ReadWriteSpliting.Cqrs.Commands;
+﻿using Masa.BuildingBlocks.ReadWriteSplitting.Cqrs.Commands;
 
 namespace Assignment.CqrsDemo.Application.Goods.Commands;
 

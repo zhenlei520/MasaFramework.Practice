@@ -1,22 +1,15 @@
 using Assignment.CqrsDemo.Application.Goods.Commands;
 using Assignment.CqrsDemo.Application.Goods.Queries;
 using Assignment.CqrsDemo.IntegrationEvents;
+using Dapr;
 using Masa.BuildingBlocks.Dispatcher.Events;
 using Masa.Contrib.Dispatcher.Events;
 using Masa.Contrib.Dispatcher.IntegrationEvents.Dapr;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpContextAccessor();
 if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddDaprStarter(opt =>
-    {
-        opt.DaprHttpPort = 7100;
-        opt.DaprGrpcPort = 7101;
-        opt.AppPort = 5072;
-    });
-}
+    builder.Services.AddDaprStarter();
 
 builder.Services.AddIntegrationEventBus(dispatcherOptions =>
 {
@@ -41,11 +34,14 @@ app.MapGet("/goods/{id}", async (Guid id, IEventBus eventBus) =>
     return query.Result;
 });
 
-app.MapPost("/integration/goods/add", (AddGoodsIntegrationEvent @event, ILogger<Program> logger) =>
-{
-    //todo: 模拟添加商品到缓存
-    logger.LogInformation("添加商品到缓存");
-}).WithTopic("pubsub", nameof(AddGoodsIntegrationEvent));
+app.MapPost(
+    "/integration/goods/add",
+    [Topic("pubsub", nameof(AddGoodsIntegrationEvent))]
+    (AddGoodsIntegrationEvent @event, ILogger<Program> logger) =>
+    {
+        //todo: 模拟添加商品到缓存
+        logger.LogInformation("添加商品到缓存, {Event}", @event);
+    });
 
 app.UseRouting();
 app.UseCloudEvents();
