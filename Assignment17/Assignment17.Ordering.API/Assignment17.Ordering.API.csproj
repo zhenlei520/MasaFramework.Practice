@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Assignment17.Ordering.Domain\Assignment17.Ordering.Domain.csproj" />
+      <ProjectReference Include="..\Assignment17.Ordering.Infrastructure\Assignment17.Ordering.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Masa.BuildingBlocks.Data.UoW" Version="0.7.0-preview.12" />
+      <PackageReference Include="Masa.Contrib.Data.UoW.EFCore" Version="0.7.0-preview.12" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.Events" Version="0.7.0-preview.12" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.Events.FluentValidation" Version="0.7.0-preview.12" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.Dapr" Version="0.7.0-preview.12" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EFCore" Version="0.7.0-preview.12" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    </ItemGroup>
+
+</Project>

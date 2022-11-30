@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Assignment17.Ordering.Domain\Assignment17.Ordering.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Masa.Contrib.Data.EFCore.SqlServer" Version="0.7.0-preview.12" />
+      <PackageReference Include="Masa.Contrib.Ddd.Domain.Repository.EFCore" Version="0.7.0-preview.12" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+    </ItemGroup>
+
+</Project>
