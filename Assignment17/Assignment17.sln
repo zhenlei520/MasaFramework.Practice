@@ -8,6 +8,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment17.Ordering.API",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment17.Ordering.Infrastructure", "Assignment17.Ordering.Infrastructure\Assignment17.Ordering.Infrastructure.csproj", "{D09EB77C-0821-4E48-A4BC-891BABE31A50}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{FABF1E58-1A27-4375-9E87-E730D20C9C53}"
+	ProjectSection(SolutionItems) = preProject
+		下单.postman_collection.json = 下单.postman_collection.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

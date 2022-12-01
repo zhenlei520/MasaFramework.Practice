@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "f8a35b63-4afc-4690-88c1-cc7a2c0d4581",
+		"name": "Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Assignment17",
+			"item": [
+				{
+					"name": "下单",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserId\":\"1\",\r\n    \"UserName\":\"Masa\",\r\n    \"City\":\"杭州\",\r\n    \"Street\":\"钱塘区\",\r\n    \"State\":\"新加坡科技园\",\r\n    \"Country\":\"中国\",\r\n    \"ZipCode\":\"310018\",\r\n    \"OrderItems\":[\r\n        {\r\n            \"ProductId\":1,\r\n            \"ProductName\":\"GA506B 温热管线饮水机\",\r\n            \"UnitPrice\":\"239.99\",\r\n            \"Discount\":0.9,\r\n            \"Units\":1,\r\n            \"PictureUrl\":\"https://blazor-pro.masastack.com/img/apps-eCommerce/15.jpg\"\r\n        }\r\n    ],\r\n    \"CardTypeId\":1,\r\n    \"CardNumber\":\"0000KaHao\",\r\n    \"CardHolderName\":\"masa\",\r\n    \"CardExpiration\":\"2099-12-31\",\r\n    \"CardSecurityNumber\":\"007\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5228/api/v1/orders/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5228",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

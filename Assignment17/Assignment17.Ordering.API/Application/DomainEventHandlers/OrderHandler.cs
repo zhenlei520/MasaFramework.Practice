@@ -1,57 +1,32 @@
-﻿using Assignment17.Ordering.API.Application.IntegrationEvents;
-using Assignment17.Ordering.Domain.AggregatesModel.BuyerAggregate;
+﻿using Assignment17.Ordering.Domain.AggregatesModel.OrderAggregate;
 using Assignment17.Ordering.Domain.Events;
-using Masa.BuildingBlocks.Data.UoW;
-using Masa.BuildingBlocks.Ddd.Domain.Repositories;
-using Masa.BuildingBlocks.Dispatcher.IntegrationEvents;
+using Masa.Contrib.Dispatcher.Events;
 
 namespace Assignment17.Ordering.API.Application.DomainEventHandlers;
 
 public class OrderHandler
 {
-    private readonly IBuyerRepository _buyerRepository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IIntegrationEventBus _integrationEventBus;
+    private readonly ILogger<OrderHandler> _logger;
+    private readonly IOrderRepository _orderRepository;
 
-    public OrderHandler(IBuyerRepository buyerRepository, IUnitOfWork unitOfWork, IIntegrationEventBus integrationEventBus)
+    public OrderHandler(ILogger<OrderHandler> logger, IOrderRepository orderRepository)
     {
-        _buyerRepository = buyerRepository;
-        _unitOfWork = unitOfWork;
-        _integrationEventBus = integrationEventBus;
+        _logger = logger;
+        _orderRepository = orderRepository;
     }
 
-    public async Task ValidateOrAddBuyerAggregateWhenOrderStarted(OrderStartedDomainEvent orderStartedEvent, ILogger<OrderHandler> logger)
+    [EventHandler]
+    public async Task UpdateOrderWhenBuyerAndPaymentMethodVerifiedDomainEventHandler(
+        BuyerAndPaymentMethodVerifiedDomainEvent buyerPaymentMethodVerifiedEvent)
     {
-        var cardTypeId = (orderStartedEvent.CardTypeId != 0) ? orderStartedEvent.CardTypeId : 1;
-        var buyer = await _buyerRepository.FindAsync(orderStartedEvent.UserId);
-        bool buyerOriginallyExisted = buyer != null;
+        var orderToUpdate = await _orderRepository.FindAsync(buyerPaymentMethodVerifiedEvent.OrderId);
+        if (orderToUpdate == null) throw new Exception("order error");
 
-        if (!buyerOriginallyExisted)
-        {
-            buyer = new Buyer(orderStartedEvent.UserId, orderStartedEvent.UserName);
-        }
+        orderToUpdate.SetBuyerId(buyerPaymentMethodVerifiedEvent.Buyer.Id);
+        orderToUpdate.SetPaymentId(buyerPaymentMethodVerifiedEvent.Payment.Id);
 
-        buyer!.VerifyOrAddPaymentMethod(cardTypeId,
-            $"Payment Method on {DateTime.UtcNow}",
-            orderStartedEvent.CardNumber,
-            orderStartedEvent.CardSecurityNumber,
-            orderStartedEvent.CardHolderName,
-            orderStartedEvent.CardExpiration,
-            orderStartedEvent.Order.Id);
-
-        var buyerUpdated = buyerOriginallyExisted ?
-            _buyerRepository.Update(buyer) :
-            _buyerRepository.Add(buyer);
-
-        await _unitOfWork.SaveChangesAsync();
-
-        var orderStatusChangedToSubmittedIntegrationEvent = new OrderStatusChangedToSubmittedIntegrationEvent(
-            orderStartedEvent.Order.Id,
-            orderStartedEvent.Order.OrderStatus.Name,
-            buyer.Name);
-        await _integrationEventBus.PublishAsync(orderStatusChangedToSubmittedIntegrationEvent);
-
-        logger.LogTrace("Buyer {BuyerId} and related payment method were validated or updated for orderId: {OrderId}.",
-            buyerUpdated.Id, orderStartedEvent.Order.Id);
+        _logger.LogTrace("Order with Id: {OrderId} has been successfully updated with a payment method {PaymentMethod} ({Id})",
+            buyerPaymentMethodVerifiedEvent.OrderId, nameof(buyerPaymentMethodVerifiedEvent.Payment),
+            buyerPaymentMethodVerifiedEvent.Payment.Id);
     }
 }
