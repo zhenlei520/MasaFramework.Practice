@@ -32,6 +32,5 @@ public class OrderCommandHandler
         _logger.LogInformation("----- Creating Order - Order: {@Order}", order);
 
         await _orderRepository.AddAsync(order, cancellationToken);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 }

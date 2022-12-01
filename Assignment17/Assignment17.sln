@@ -11,6 +11,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{FABF1E58-1A27-4375-9E87-E730D20C9C53}"
 	ProjectSection(SolutionItems) = preProject
 		下单.postman_collection.json = 下单.postman_collection.json
+		项目结构.xmind = 项目结构.xmind
 	EndProjectSection
 EndProject
 Global

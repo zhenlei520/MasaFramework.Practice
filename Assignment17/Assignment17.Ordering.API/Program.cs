@@ -53,6 +53,9 @@ builder.Services
     });
 var app = builder.Build();
 
+//使用全局异常
+app.UseMasaExceptionHandler();
+
 #region 启用Swagger
 
 if (app.Environment.IsDevelopment())
@@ -85,6 +88,11 @@ app.UseEndpoints(endpoints =>
 #endregion
 
 app.MapGet("/", () => "Hello Assignment17");
+
+app.MapGet("/test", () =>
+{
+    throw new UserFriendlyException("test");
+});
 
 app.MapPost("/api/v1/orders/create", async (
     IEventBus eventBus,
