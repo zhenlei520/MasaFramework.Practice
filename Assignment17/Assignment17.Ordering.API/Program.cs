@@ -30,17 +30,6 @@ var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 assemblies.Add(typeof(OrderingContext).Assembly);
 assemblies.Add(typeof(OrderingDomainException).Assembly);
 
-#region 使用DaprClient
-
-builder.Services.AddDaprStarter(options =>
-{
-    options.DaprGrpcPort = 3000;
-    options.DaprGrpcPort = 3001;
-});
-builder.Services.AddDaprClient();
-
-#endregion
-
 builder.Services
     .AddValidatorsFromAssembly(Assembly.GetEntryAssembly())
     .AddDomainEventBus(assemblies.Distinct().ToArray(), options =>
@@ -51,6 +40,20 @@ builder.Services
             .UseUoW<OrderingContext>(dbContextBuilder => dbContextBuilder.UseSqlServer())
             .UseRepository<OrderingContext>();
     });
+
+#region 使用DaprClient
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDaprStarter(options =>
+    {
+        options.DaprGrpcPort = 3000;
+        options.DaprGrpcPort = 3001;
+    });
+}
+
+#endregion
+
 var app = builder.Build();
 
 //使用全局异常

@@ -10,15 +10,14 @@ namespace Assignment17.Ordering.API.Application.DomainEventHandlers;
 public class BuyerHandler
 {
     private readonly IBuyerRepository _buyerRepository;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IIntegrationEventBus _integrationEventBus;
     private readonly ILogger<BuyerHandler> _logger;
 
-    public BuyerHandler(IBuyerRepository buyerRepository, IUnitOfWork unitOfWork, IIntegrationEventBus integrationEventBus,
+    public BuyerHandler(IBuyerRepository buyerRepository,
+        IIntegrationEventBus integrationEventBus,
         ILogger<BuyerHandler> logger)
     {
         _buyerRepository = buyerRepository;
-        _unitOfWork = unitOfWork;
         _integrationEventBus = integrationEventBus;
         _logger = logger;
     }
@@ -46,8 +45,6 @@ public class BuyerHandler
         var buyerUpdated = buyerOriginallyExisted ?
             _buyerRepository.Update(buyer) :
             _buyerRepository.Add(buyer);
-
-        await _unitOfWork.SaveChangesAsync();
 
         var orderStatusChangedToSubmittedIntegrationEvent = new OrderStatusChangedToSubmittedIntegrationEvent(
             orderStartedEvent.Order.Id,

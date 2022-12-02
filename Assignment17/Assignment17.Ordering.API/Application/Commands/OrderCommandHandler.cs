@@ -7,13 +7,11 @@ namespace Assignment17.Ordering.API.Application.Commands;
 public class OrderCommandHandler
 {
     private readonly IOrderRepository _orderRepository;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<OrderCommandHandler> _logger;
 
-    public OrderCommandHandler(IOrderRepository orderRepository, IUnitOfWork unitOfWork, ILogger<OrderCommandHandler> logger)
+    public OrderCommandHandler(IOrderRepository orderRepository, ILogger<OrderCommandHandler> logger)
     {
         _orderRepository = orderRepository;
-        _unitOfWork = unitOfWork;
         _logger = logger;
     }
 
