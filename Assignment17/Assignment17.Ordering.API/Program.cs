@@ -31,7 +31,7 @@ assemblies.Add(typeof(OrderingContext).Assembly);
 assemblies.Add(typeof(OrderingDomainException).Assembly);
 
 builder.Services
-    .AddValidatorsFromAssembly(Assembly.GetEntryAssembly())
+    .AddValidatorsFromAssembly(Assembly.GetEntryAssembly())//提供基于FluentValidation的参数验证
     .AddDomainEventBus(assemblies.Distinct().ToArray(), options =>
     {
         options
