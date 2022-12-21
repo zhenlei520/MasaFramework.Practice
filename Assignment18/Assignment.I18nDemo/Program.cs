@@ -1,3 +1,4 @@
+using System.Reflection;
 using Assignment.I18nDemo.Resources;
 using Masa.BuildingBlocks.Globalization.I18n;
 
@@ -18,7 +19,16 @@ builder.Services.Configure<MasaI18nOptions>(options =>
 
 #endregion
 
-builder.Services.AddI18nByEmbedded(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddI18nByEmbedded(new[] { Assembly.GetEntryAssembly() });
+
+// builder.Services.AddI18nByEmbedded(
+//     AppDomain.CurrentDomain.GetAssemblies(),
+//     Path.Combine("Resources", "I18n"),
+//     "supportedCultures.json",
+//     options =>
+//     {
+//         options.UseDcc("{Replace-Your-AppId}", "{Replace-Your-ConfigObjectPrefix}");
+//     });
 
 var app = builder.Build();
 

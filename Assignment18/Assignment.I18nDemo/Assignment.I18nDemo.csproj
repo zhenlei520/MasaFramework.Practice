@@ -17,7 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Masa.Contrib.Configuration" Version="0.7.0-preview.14" />
+    <PackageReference Include="Masa.Contrib.Configuration.ConfigurationApi.Dcc" Version="0.7.0-preview.15" />
     <PackageReference Include="Masa.Contrib.Globalization.I18n.AspNetCore" Version="0.7.0-preview.14" />
+    <PackageReference Include="Masa.Contrib.Globalization.I18n.Dcc" Version="0.7.0-preview.14" />
   </ItemGroup>
 
 </Project>
