@@ -1,8 +1,14 @@
 using System.Reflection;
 using Assignment.I18nDemo.Resources;
+using Masa.BuildingBlocks.Configuration;
 using Masa.BuildingBlocks.Globalization.I18n;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMasaConfiguration(configurationBuilder =>
+{
+    // configurationBuilder.UseDcc();//正确配置好Dcc配置后开启
+});
 
 #region 自定义资源
 
@@ -19,7 +25,7 @@ builder.Services.Configure<MasaI18nOptions>(options =>
 
 #endregion
 
-builder.Services.AddI18nByEmbedded(new[] { Assembly.GetEntryAssembly() });
+builder.Services.AddI18nByEmbedded(new[] { Assembly.GetEntryAssembly()! });
 
 // builder.Services.AddI18nByEmbedded(
 //     AppDomain.CurrentDomain.GetAssemblies(),
