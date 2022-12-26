@@ -13,13 +13,13 @@
 
     <ItemGroup>
       <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
-      <PackageReference Include="Masa.Contrib.Data.UoW.EFCore" Version="0.7.0-preview.12" />
-      <PackageReference Include="Masa.Contrib.Development.DaprStarter.AspNetCore" Version="0.7.0-preview.12" />
-      <PackageReference Include="Masa.Contrib.Dispatcher.Events" Version="0.7.0-preview.12" />
-      <PackageReference Include="Masa.Contrib.Dispatcher.Events.FluentValidation" Version="0.7.0-preview.12" />
-      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.Dapr" Version="0.7.0-preview.12" />
-      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EFCore" Version="0.7.0-preview.12" />
-      <PackageReference Include="Masa.Contrib.Exceptions" Version="0.7.0-preview.12" />
+      <PackageReference Include="Masa.Contrib.Data.UoW.EFCore" Version="0.7.0-preview.16" />
+      <PackageReference Include="Masa.Contrib.Development.DaprStarter.AspNetCore" Version="0.7.0-preview.16" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.Events" Version="0.7.0-preview.16" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.Events.FluentValidation" Version="0.7.0-preview.16" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.Dapr" Version="0.7.0-preview.16" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EFCore" Version="0.7.0-preview.16" />
+      <PackageReference Include="Masa.Contrib.Exceptions" Version="0.7.0-preview.16" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
         <PrivateAssets>all</PrivateAssets>
