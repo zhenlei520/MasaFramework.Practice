@@ -1,6 +1,5 @@
 using System.Reflection;
 using Assignment.I18nDemo.Resources;
-using Masa.BuildingBlocks.Configuration;
 using Masa.BuildingBlocks.Globalization.I18n;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,10 +24,15 @@ builder.Services.Configure<MasaI18nOptions>(options =>
 
 #endregion
 
-builder.Services.AddI18nByEmbedded(new[] { Assembly.GetEntryAssembly()! });
+builder.Services.AddI18n();
+
+// builder.Services.AddI18nByEmbedded(new[] { Assembly.GetEntryAssembly()! });
 
 // builder.Services.AddI18nByEmbedded(
-//     AppDomain.CurrentDomain.GetAssemblies(),
+//     new List<Assembly>()
+//     {
+//         typeof(Program).Assembly
+//     },
 //     Path.Combine("Resources", "I18n"),
 //     "supportedCultures.json",
 //     options =>
@@ -38,7 +42,7 @@ builder.Services.AddI18nByEmbedded(new[] { Assembly.GetEntryAssembly()! });
 
 var app = builder.Build();
 
-app.UseI18n();
+app.UseI18n("en");
 
 app.MapGet("/", () => "Hello World!");
 

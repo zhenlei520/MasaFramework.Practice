@@ -7,20 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Resources\I18n\en-US.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\I18n*\*.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Masa.Contrib.Configuration" Version="0.7.0-preview.16" />
     <PackageReference Include="Masa.Contrib.Configuration.ConfigurationApi.Dcc" Version="0.7.0-preview.16" />
     <PackageReference Include="Masa.Contrib.Globalization.I18n.AspNetCore" Version="0.7.0-preview.16" />
     <PackageReference Include="Masa.Contrib.Globalization.I18n.Dcc" Version="0.7.0-preview.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Resources\I18n*\*.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
