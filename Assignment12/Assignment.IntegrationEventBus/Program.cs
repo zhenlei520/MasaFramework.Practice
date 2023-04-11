@@ -1,10 +1,8 @@
 using Assignment.IntegrationEventBus.Events;
 using Assignment.IntegrationEventBus.Infrastructure;
 using Dapr;
+using Masa.BuildingBlocks.Data.UoW;
 using Masa.BuildingBlocks.Dispatcher.IntegrationEvents;
-using Masa.Contrib.Data.UoW.EFCore;
-using Masa.Contrib.Dispatcher.IntegrationEvents.Dapr;
-using Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EFCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,26 +20,31 @@ builder.Services.AddIntegrationEventBus(option =>
 {
     option.UseDapr()
         .UseEventLog<UserDbContext>()
-        .UseUoW<UserDbContext>(optionBuilder => optionBuilder.UseSqlite($"Data Source=./Db/{Guid.NewGuid():N}.db;"));
+        .UseUoW<UserDbContext>(optionBuilder => optionBuilder.UseSqlite($"Data Source=user.db;"));
 });
 
 var app = builder.Build();
 
+#region 迁移模型
+
+var dbContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<UserDbContext>();
+dbContext.Database.Migrate();
+
+#endregion
+
 app.MapGet("/", () => "Hello IntegrationEventBus!");
 
-app.MapGet("/register", async (IIntegrationEventBus eventBus) =>
+app.MapGet("/register", (IIntegrationEventBus eventBus) =>
 {
-    //todo: 模拟注册用户并发布注册用户事件
-    await eventBus.PublishAsync(new RegisterUserEvent()
+    //todo: 模拟注册用户并发布注册用户事件, 直接使用集成事件总线发布将不记录本地消息表
+    eventBus.PublishAsync(new RegisterUserEvent()
     {
         Account = "Tom",
         Mobile = "19999999999"
     });
 });
 
-app.MapPost("/IntegrationEvent/RegisterUser", [Topic("pubsub", nameof(RegisterUserEvent))](RegisterUserEvent @event) =>
-{
-    Console.WriteLine($"注册用户成功: {@event.Account}");
-});
+app.MapPost("/IntegrationEvent/RegisterUser",
+    [Topic("pubsub", nameof(RegisterUserEvent))](RegisterUserEvent @event) => { Console.WriteLine($"注册用户成功: {@event.Account}"); });
 
 app.Run();

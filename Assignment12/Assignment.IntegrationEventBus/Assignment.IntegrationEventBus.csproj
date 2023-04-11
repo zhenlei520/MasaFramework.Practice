@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Masa.Contrib.Data.EFCore.Sqlite" Version="0.7.0-preview.8" />
-      <PackageReference Include="Masa.Contrib.Data.UoW.EFCore" Version="0.7.0-preview.8" />
-      <PackageReference Include="Masa.Contrib.Development.DaprStarter.AspNetCore" Version="0.7.0-preview.8" />
-      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.Dapr" Version="0.7.0-preview.8" />
-      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EFCore" Version="0.7.0-preview.8" />
+      <PackageReference Include="Masa.Contrib.Data.EFCore.Sqlite" Version="1.0.0-preview.28" />
+      <PackageReference Include="Masa.Contrib.Data.UoW.EFCore" Version="1.0.0-preview.28" />
+      <PackageReference Include="Masa.Contrib.Development.DaprStarter.AspNetCore" Version="1.0.0-preview.28" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.Dapr" Version="1.0.0-preview.28" />
+      <PackageReference Include="Masa.Contrib.Dispatcher.IntegrationEvents.EventLogs.EFCore" Version="1.0.0-preview.28" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.6">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
